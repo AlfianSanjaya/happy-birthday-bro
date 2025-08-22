@@ -279,30 +279,68 @@
   </div>
   <script src="confetti.js"></script>
   <script>
-    document.getElementById('gacha-btn').onclick = function (e) {
+    let fetchedCodes = null;
+
+    function fetchVouchersWithTimeout(timeout = 3500) {
+      return new Promise((resolve) => {
+        let done = false;
+        // Start fetch
+        fetch('/api/getSteamCodes')
+          .then(res => res.json())
+          .then(data => {
+            if (Array.isArray(data.codes)) {
+              fetchedCodes = data.codes;
+              sessionStorage.setItem('vouchers', JSON.stringify(fetchedCodes));
+            }
+            done = true;
+            resolve();
+          })
+          .catch(() => {
+            done = true;
+            resolve();
+          });
+        // Timeout fallback
+        setTimeout(() => {
+          if (!done) resolve();
+        }, timeout);
+      });
+    }
+
+    document.getElementById('gacha-btn').onclick = async function (e) {
       e.preventDefault();
       // Stop background music
       var bgAudio = document.getElementById('bg-audio');
       if (bgAudio) bgAudio.pause();
-      // Play gacha audio
+
+      // Play gacha audio (with slight delay)
       var gachaAudio = document.getElementById('gacha-audio');
       if (gachaAudio) {
-        gachaAudio.currentTime = 0;
-        gachaAudio.play();
+        setTimeout(function () {
+          gachaAudio.currentTime = 0;
+          gachaAudio.play();
+        }, 10);
       }
+
       // Show overlay
       document.getElementById('gacha-overlay').style.display = 'flex';
 
-      // At 4200ms, trigger the "explosion" animation
+      // Start fetching vouchers and animation timer in parallel
+      const fetchPromise = fetchVouchersWithTimeout(3500);
+
+      // At 3200ms, trigger the "explosion" animation
       setTimeout(function () {
         var card = document.querySelector('.gacha-card');
         if (card) card.classList.add('gacha-explode');
-      }, 2000);
+      }, 3200);
 
-      // Redirect after animation
-      setTimeout(function () {
-        window.location.href = 'gift.html';
-      }, 4000);
+      // Wait for both: fetch to finish (or timeout), and animation (4000ms)
+      await Promise.all([
+        fetchPromise,
+        new Promise(resolve => setTimeout(resolve, 4000))
+      ]);
+
+      // Now redirect
+      window.location.href = 'gift.html';
     };
   </script>
 </body>
