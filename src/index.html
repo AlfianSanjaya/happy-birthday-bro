@@ -327,11 +327,11 @@
       // Start fetching vouchers and animation timer in parallel
       const fetchPromise = fetchVouchersWithTimeout(3500);
 
-      // At 3200ms, trigger the "explosion" animation
+      // At 2000ms, trigger the "explosion" animation
       setTimeout(function () {
         var card = document.querySelector('.gacha-card');
         if (card) card.classList.add('gacha-explode');
-      }, 3200);
+      }, 2000);
 
       // Wait for both: fetch to finish (or timeout), and animation (4000ms)
       await Promise.all([
