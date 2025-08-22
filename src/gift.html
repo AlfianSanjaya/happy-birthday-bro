@@ -136,6 +136,12 @@
                 transform: translateX(-50%) rotate(-6deg);
             }
         }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
@@ -160,7 +166,12 @@
             </ol>
         </section>
         <div class="steam-codes">
-            <!-- Codes will be dynamically inserted here -->
+            <div id="loading-secrets"
+                style="color:#1e90ff; font-size:1.2em; text-align:center; display:none;">
+                <span class="loader"
+                    style="display:inline-block;width:1em;height:1em;border:2px solid #1e90ff;border-top:2px solid transparent;border-radius:50%;animation:spin 1s linear infinite;vertical-align:middle;margin-right:0.5em;"></span>
+                Loading secrets...
+            </div>
         </div>
     </main>
     <!-- Balloons -->
@@ -170,10 +181,10 @@
     <div class="balloon balloon4"></div>
     <div class="balloon balloon5"></div>
     <script>
+        const codesDiv = document.querySelector('.steam-codes');
         fetch('/api/getSteamCodes')
             .then(res => res.json())
             .then(data => {
-                const codesDiv = document.querySelector('.steam-codes');
                 codesDiv.innerHTML = '';
                 if (Array.isArray(data.codes)) {
                     data.codes.forEach(code => {
@@ -189,7 +200,6 @@
                 }
             })
             .catch(() => {
-                const codesDiv = document.querySelector('.steam-codes');
                 codesDiv.innerHTML = '<div style="color:red;">Failed to load codes.</div>';
             });
     </script>
