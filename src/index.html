@@ -10,18 +10,301 @@
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <title>Happy Birthday 🎉</title>
+  <style>
+    #gacha-overlay {
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s;
+      overflow: hidden;
+    }
+
+    .gacha-effect {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gacha-card {
+      width: 120px;
+      height: 170px;
+      background: linear-gradient(135deg, #fffbe6 0%, #ffe0e9 100%);
+      border-radius: 1em;
+      box-shadow: 0 8px 32px #0006;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+      position: relative;
+      animation: gachaShake 1.2s cubic-bezier(.36, .07, .19, .97) infinite;
+      margin-bottom: 1.5em;
+      overflow: visible;
+    }
+
+    .gacha-card i {
+      color: #f9d423;
+      font-size: 2em;
+      margin-bottom: 0.2em;
+      animation: gachaIconPop 1.2s cubic-bezier(.36, .07, .19, .97) infinite,
+        gachaShine 2.5s linear infinite;
+      filter: drop-shadow(0 0 16px #fffbe6) drop-shadow(0 0 32px #f9d42388);
+      transition: font-size 0.3s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .gacha-card i::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 2.5em;
+      height: 2.5em;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 1;
+      animation: gachaShinePulse 2.5s linear infinite;
+    }
+
+    .gacha-card span {
+      font-size: 2em;
+      color: #ff4e50;
+      font-weight: bold;
+    }
+
+    .gacha-text {
+      color: #fff;
+      font-size: 1.5em;
+      letter-spacing: 0.05em;
+      text-shadow: 0 2px 8px #000a;
+    }
+
+    @keyframes gachaShake {
+      0%,
+      100% {
+        transform: rotate(-5deg);
+      }
+
+      20% {
+        transform: rotate(5deg);
+      }
+
+      40% {
+        transform: rotate(-3deg);
+      }
+
+      60% {
+        transform: rotate(3deg);
+      }
+
+      80% {
+        transform: rotate(-2deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .gacha-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: repeating-linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.08) 0px,
+        rgba(255, 255, 255, 0.08) 2px,
+        transparent 2px,
+        transparent 32px
+      );
+      animation: gachaLinesMove 2.5s linear infinite;
+    }
+
+    @keyframes gachaLinesMove {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 80px 80px;
+      }
+    }
+
+    @keyframes gachaIconPop {
+      0%,
+      100% {
+        font-size: 2em;
+      }
+
+      20% {
+        font-size: 2.5em;
+      }
+
+      40% {
+        font-size: 2.2em;
+      }
+
+      60% {
+        font-size: 2.7em;
+      }
+
+      80% {
+        font-size: 2.3em;
+      }
+    }
+
+    @keyframes gachaShine {
+      0% {
+        filter: drop-shadow(0 0 16px #fffbe6) drop-shadow(0 0 32px #f9d42388);
+      }
+
+      50% {
+        filter: drop-shadow(0 0 32px #fffbe6) drop-shadow(0 0 64px #f9d423cc);
+      }
+
+      100% {
+        filter: drop-shadow(0 0 16px #fffbe6) drop-shadow(0 0 32px #f9d42388);
+      }
+    }
+
+    @keyframes gachaShinePulse {
+      0%,
+      100% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.5);
+      }
+    }
+
+    .gacha-card.gacha-explode {
+      animation: gachaExplode 0.5s cubic-bezier(.36, .07, .19, .97) forwards !important;
+      box-shadow: 0 0 80px 40px #fffbe6, 0 0 120px 60px #f9d42388;
+      z-index: 10;
+    }
+
+    .gacha-card.gacha-explode i {
+      animation: gachaIconExplode 0.5s cubic-bezier(.36, .07, .19, .97) forwards !important;
+      filter: drop-shadow(0 0 64px #fffbe6) drop-shadow(0 0 128px #f9d423cc);
+    }
+
+    @keyframes gachaExplode {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      10% {
+        transform: scale(1.1) rotate(-10deg);
+      }
+
+      20% {
+        transform: scale(1.2) rotate(10deg);
+      }
+
+      30% {
+        transform: scale(1.3) rotate(-10deg);
+      }
+
+      40% {
+        transform: scale(1.4) rotate(10deg);
+      }
+
+      50% {
+        transform: scale(1.5) rotate(-10deg);
+      }
+
+      60% {
+        transform: scale(1.7) rotate(0deg);
+      }
+
+      80% {
+        transform: scale(2.1) rotate(0deg);
+      }
+
+      100% {
+        transform: scale(2.5) rotate(0deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes gachaIconExplode {
+      0% {
+        font-size: 2em;
+      }
+
+      100% {
+        font-size: 4em;
+        opacity: 0.2;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <audio src="./assets/audio/happy-birthday-jazz.mp3" autoplay loop hidden></audio>
+  <audio id="bg-audio" src="./assets/audio/happy-birthday-jazz.mp3" autoplay loop hidden></audio>
+  <audio id="gacha-audio" src="./assets/audio/gift-opening.mp3" hidden></audio>
   <canvas id="confetti-canvas"></canvas>
   <main>
     <h1 class="rainbow-text">Happy birthday, Armanza!</h1>
-    <button class="gift-btn" onclick="window.location.href='gift.html'">
+    <button class="gift-btn" id="gacha-btn">
       <i class="fa-solid fa-gift" style="margin-right: 0.5em;"></i> Open your gift
     </button>
   </main>
+  <div id="gacha-overlay" style="display:none;">
+    <div class="gacha-lines"></div>
+    <div class="gacha-effect">
+      <div class="gacha-card">
+        <i class="fa-solid fa-gift"></i>
+        <span>?</span>
+      </div>
+      <div class="gacha-text">Pulling your gift...</div>
+    </div>
+  </div>
   <script src="confetti.js"></script>
+  <script>
+    document.getElementById('gacha-btn').onclick = function (e) {
+      e.preventDefault();
+      // Stop background music
+      var bgAudio = document.getElementById('bg-audio');
+      if (bgAudio) bgAudio.pause();
+      // Play gacha audio
+      var gachaAudio = document.getElementById('gacha-audio');
+      if (gachaAudio) {
+        gachaAudio.currentTime = 0;
+        gachaAudio.play();
+      }
+      // Show overlay
+      document.getElementById('gacha-overlay').style.display = 'flex';
+
+      // At 4200ms, trigger the "explosion" animation
+      setTimeout(function () {
+        var card = document.querySelector('.gacha-card');
+        if (card) card.classList.add('gacha-explode');
+      }, 2000);
+
+      // Redirect after animation
+      setTimeout(function () {
+        window.location.href = 'gift.html';
+      }, 4000);
+    };
+  </script>
 </body>
 
 </html>
