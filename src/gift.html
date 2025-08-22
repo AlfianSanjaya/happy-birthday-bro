@@ -15,25 +15,31 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            overflow-y: auto;
-        }
-
-        body {
             min-height: 100vh;
             box-sizing: border-box;
             background: linear-gradient(135deg, #f9d423 0%, #ff4e50 70%, #fff 100%);
         }
 
+        body {
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
         main {
             width: 90vw;
             max-width: 800px;
-            margin: 5vh auto 5vh auto;
-            /* Add top and bottom margin */
+            min-height: 80vh;
+            /* Ensures main fills most of the viewport */
+            margin: 0 auto;
             text-align: center;
-            padding: 2.5em 2em;
+            padding: 5vh 2em 5vh 2em;
+            /* Top and bottom padding for spacing */
             background: rgba(255, 255, 255, 0.08);
             border-radius: 1.5em;
             box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .rainbow-text {
@@ -226,9 +232,9 @@
 
         @media (max-width: 900px) {
             main {
-                padding: 1em 0.5em;
+                padding: 2vh 0.5em 2vh 0.5em;
                 max-width: 98vw;
-                margin: 3vh auto 3vh auto;
+                min-height: 85vh;
             }
 
             .instructions {
