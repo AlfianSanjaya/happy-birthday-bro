@@ -3,6 +3,9 @@
     "rewrite": "/index.html"
   },
   "routes": [
+    { "route": "/assets/*", "allowedRoles": ["admin"] },
+    { "route": "/*.css", "allowedRoles": ["admin"] },
+    { "route": "/*.js", "allowedRoles": ["admin"] },
     {
       "route": "/*",
       "allowedRoles": [ "admin" ]
