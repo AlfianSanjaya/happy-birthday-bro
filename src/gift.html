@@ -1,151 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Present</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .steam-codes {
-      margin-top: 2em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5em;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Present</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .steam-codes {
+            margin-top: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5em;
+        }
 
-    .steam-code {
-      font-size: 2em;
-      font-weight: bold;
-      background: linear-gradient(90deg, #1e90ff, #43e97b, #f9d423, #ff4e50);
-      background-size: 200% auto;
-      color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
-      animation: rainbow 3s linear infinite;
-      -webkit-text-stroke: 1px #fff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.15);
-      letter-spacing: 0.15em;
-      padding: 0.5em 1em;
-      border-radius: 0.5em;
-      transition: transform 0.3s;
-    }
+        .steam-code {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(90deg, #1e90ff, #43e97b, #f9d423, #ff4e50);
+            background-size: 200% auto;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: rainbow 3s linear infinite;
+            -webkit-text-stroke: 1px #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.15em;
+            padding: 0.5em 1em;
+            border-radius: 0.5em;
+            transition: transform 0.3s;
+        }
 
-    .steam-code:hover {
-      transform: scale(1.05);
-    }
+        .steam-code:hover {
+            transform: scale(1.05);
+        }
 
-    @keyframes rainbow {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
-    }
+        @keyframes rainbow {
+            0% {
+                background-position: 0% 50%;
+            }
 
-    /* Balloons */
-    .balloon {
-      position: fixed;
-      width: 60px;
-      height: 80px;
-      border-radius: 60% 60% 60% 60%;
-      opacity: 0.85;
-      z-index: 20;
-      left: 10vw;
-      top: -100px;
-      animation: floatBalloon 8s linear infinite;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
 
-    .balloon1 { background: #ff4e50; left: 10vw; animation-delay: 0s; }
-    .balloon2 { background: #f9d423; left: 30vw; animation-delay: 2s; }
-    .balloon3 { background: #1e90ff; left: 50vw; animation-delay: 4s; }
-    .balloon4 { background: #43e97b; left: 70vw; animation-delay: 1s; }
-    .balloon5 { background: #f67280; left: 85vw; animation-delay: 3s; }
+        /* Balloons */
+        .balloon {
+            position: fixed;
+            width: 60px;
+            height: 80px;
+            border-radius: 60% 60% 60% 60%;
+            opacity: 0.85;
+            z-index: 20;
+            left: 10vw;
+            top: -100px;
+            animation: floatBalloon 8s linear infinite;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
 
-    @keyframes floatBalloon {
-      0% {
-        top: 110vh;
-        transform: translateY(0) scale(1) rotate(-6deg);
-      }
-      80% {
-        transform: translateY(-80vh) scale(1.05) rotate(6deg);
-      }
-      100% {
-        top: -100px;
-        transform: translateY(-100vh) scale(1) rotate(-6deg);
-      }
-    }
+        .balloon1 {
+            background: #ff4e50;
+            left: 10vw;
+            animation-delay: 0s;
+        }
 
-    .balloon::after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 50%;
-      top: 80px; /* bottom of the balloon */
-      width: 2px;
-      height: 80px; /* increased from 40px to 80px */
-      background: rgba(80,80,80,0.4);
-      transform: translateX(-50%);
-      border-radius: 1px;
-      z-index: -1;
-      animation: waveString 1.6s ease-in-out infinite alternate;
-    }
+        .balloon2 {
+            background: #f9d423;
+            left: 30vw;
+            animation-delay: 2s;
+        }
 
-    @keyframes waveString {
-      0% {
-        transform: translateX(-50%) rotate(-6deg);
-      }
-      50% {
-        transform: translateX(-50%) rotate(6deg);
-      }
-      100% {
-        transform: translateX(-50%) rotate(-6deg);
-      }
-    }
-  </style>
+        .balloon3 {
+            background: #1e90ff;
+            left: 50vw;
+            animation-delay: 4s;
+        }
+
+        .balloon4 {
+            background: #43e97b;
+            left: 70vw;
+            animation-delay: 1s;
+        }
+
+        .balloon5 {
+            background: #f67280;
+            left: 85vw;
+            animation-delay: 3s;
+        }
+
+        @keyframes floatBalloon {
+            0% {
+                top: 110vh;
+                transform: translateY(0) scale(1) rotate(-6deg);
+            }
+
+            80% {
+                transform: translateY(-80vh) scale(1.05) rotate(6deg);
+            }
+
+            100% {
+                top: -100px;
+                transform: translateY(-100vh) scale(1) rotate(-6deg);
+            }
+        }
+
+        .balloon::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            /* bottom of the balloon */
+            width: 2px;
+            height: 80px;
+            /* increased from 40px to 80px */
+            background: rgba(80, 80, 80, 0.4);
+            transform: translateX(-50%);
+            border-radius: 1px;
+            z-index: -1;
+            animation: waveString 1.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes waveString {
+            0% {
+                transform: translateX(-50%) rotate(-6deg);
+            }
+
+            50% {
+                transform: translateX(-50%) rotate(6deg);
+            }
+
+            100% {
+                transform: translateX(-50%) rotate(-6deg);
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <audio src="./assets/audio/happy-birthday-jazz.mp3" autoplay loop hidden></audio>
-  <canvas id="confetti-canvas"></canvas>
-  <main>
-    <h1 class="rainbow-text" style="font-size:2.5em;">
-      Here is your present, these are all Steam Codes worth 30 euros each.<br>
-      You can add them to your Steam account :) Happy Birthday 🎉
-    </h1>
-    <section class="instructions" style="max-width: 600px; margin: 2em auto 0; text-align: left; background: rgba(255,255,255,0.15); padding: 1.5em 2em; border-radius: 1em; box-shadow: 0 2px 16px rgba(0,0,0,0.06);">
-      <h2 style="font-size: 1.3em; margin-top: 0; color: #1e90ff;">Step-by-Step Instructions</h2>
-      <ol style="padding-left: 1.2em; margin: 0;">
-        <li><b>Log in to your Steam account:</b> on the Steam website or in the Steam application.</li>
-        <li><b>Navigate to your Account Details:</b> by clicking your account name in the top right and selecting <i>Account Details</i> from the dropdown menu.</li>
-        <li><b>Find the Add Funds section:</b> and click on <i>Add Funds to Your Steam Wallet</i>.</li>
-        <li><b>Select the option to redeem a code:</b> by clicking on <i>Redeem a Steam Wallet Code</i>.</li>
-        <li><b>Enter your unique Steam Wallet code:</b> into the field and click <i>Continue</i>.</li>
-      </ol>
-    </section>
-    <div class="steam-codes">
-      <div class="steam-code">AAAAA-BBBBB-CCCCC</div>
-      <div class="steam-code">DDDDD-EEEEE-FFFFF</div>
-      <div class="steam-code">GGGGG-HHHHH-IIIII</div>
-    </div>
-  </main>
-  <!-- Balloons -->
-  <div class="balloon balloon1"></div>
-  <div class="balloon balloon2"></div>
-  <div class="balloon balloon3"></div>
-  <div class="balloon balloon4"></div>
-  <div class="balloon balloon5"></div>
-  <script>
-    fetch('/api/getSteamCodes')
-    .then(res => res.json())
-    .then(data => {
-        const codesDiv = document.querySelector('.steam-codes');
-        codesDiv.innerHTML = '';
-        data.codes.forEach(code => {
-        const div = document.createElement('div');
-        div.className = 'steam-code';
-        div.textContent = code;
-        codesDiv.appendChild(div);
-        });
-    });
+    <audio src="./assets/audio/happy-birthday-jazz.mp3" autoplay loop hidden></audio>
+    <canvas id="confetti-canvas"></canvas>
+    <main>
+        <h1 class="rainbow-text" style="font-size:2.5em;">
+            Here is your present, these are all Steam Codes worth 30 euros each.<br>
+            You can add them to your Steam account :) Happy Birthday 🎉
+        </h1>
+        <section class="instructions"
+            style="max-width: 600px; margin: 2em auto 0; text-align: left; background: rgba(255,255,255,0.15); padding: 1.5em 2em; border-radius: 1em; box-shadow: 0 2px 16px rgba(0,0,0,0.06);">
+            <h2 style="font-size: 1.3em; margin-top: 0; color: #1e90ff;">Step-by-Step Instructions</h2>
+            <ol style="padding-left: 1.2em; margin: 0;">
+                <li><b>Log in to your Steam account:</b> on the Steam website or in the Steam application.</li>
+                <li><b>Navigate to your Account Details:</b> by clicking your account name in the top right and
+                    selecting <i>Account Details</i> from the dropdown menu.</li>
+                <li><b>Find the Add Funds section:</b> and click on <i>Add Funds to Your Steam Wallet</i>.</li>
+                <li><b>Select the option to redeem a code:</b> by clicking on <i>Redeem a Steam Wallet Code</i>.</li>
+                <li><b>Enter your unique Steam Wallet code:</b> into the field and click <i>Continue</i>.</li>
+            </ol>
+        </section>
+        <div class="steam-codes">
+            <div class="steam-code">AAAAA-BBBBB-CCCCC</div>
+            <div class="steam-code">DDDDD-EEEEE-FFFFF</div>
+            <div class="steam-code">GGGGG-HHHHH-IIIII</div>
+        </div>
+    </main>
+    <!-- Balloons -->
+    <div class="balloon balloon1"></div>
+    <div class="balloon balloon2"></div>
+    <div class="balloon balloon3"></div>
+    <div class="balloon balloon4"></div>
+    <div class="balloon balloon5"></div>
+    <script>
+        fetch('/api/getSteamCodes')
+            .then(res => res.json())
+            .then(data => {
+                const codesDiv = document.querySelector('.steam-codes');
+                codesDiv.innerHTML = '';
+                data.codes.forEach(code => {
+                    const div = document.createElement('div');
+                    div.className = 'steam-code';
+                    div.textContent = code;
+                    codesDiv.appendChild(div);
+                });
+            });
     </script>
-  <script src="confetti.js"></script>
+    <script src="confetti.js"></script>
 </body>
+
 </html>
