@@ -8,6 +8,6 @@ app.http('getSteamCodes', {
 
         const name = request.query.get('name') || await request.text() || 'world';
 
-        return { body: `Hello, ${name}!` };
+        return { body: JSON.stringify({ "text": `Hello, from the API ${name}!` }) };
     }
 });
