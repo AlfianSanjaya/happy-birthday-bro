@@ -5,13 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <!-- Add Font Awesome CDN below -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <title>Vanilla JavaScript App</title>
 </head>
 
 <body>
+  <audio src="./assets/audio/happy-birthday-jazz.mp3" autoplay loop hidden></audio>
+  <canvas id="confetti-canvas"></canvas>
   <main>
-    <h1>Vanilla JavaScript App</h1>
+    <h1 class="rainbow-text">Happy birthday, Armanza!</h1>
+    <button class="gift-btn" onclick="window.location.href='gift.html'">
+      <i class="fa-solid fa-gift" style="margin-right: 0.5em;"></i> Open your gift
+    </button>
   </main>
+  <script src="confetti.js"></script>
 </body>
 
 </html>
