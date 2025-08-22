@@ -132,6 +132,20 @@
   <div class="balloon balloon3"></div>
   <div class="balloon balloon4"></div>
   <div class="balloon balloon5"></div>
+  <script>
+    fetch('/api/getSteamCodes')
+    .then(res => res.json())
+    .then(data => {
+        const codesDiv = document.querySelector('.steam-codes');
+        codesDiv.innerHTML = '';
+        data.codes.forEach(code => {
+        const div = document.createElement('div');
+        div.className = 'steam-code';
+        div.textContent = code;
+        codesDiv.appendChild(div);
+        });
+    });
+    </script>
   <script src="confetti.js"></script>
 </body>
 </html>
